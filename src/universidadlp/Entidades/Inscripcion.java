@@ -61,6 +61,11 @@ private double nota;
         this.nota = nota;
     }
 
+    @Override
+    public String toString() {
+        return idInscripcion+" "+alumno.getApellido()+", "+alumno.getNombre()+", "+materia.getNombre();
+    }
+
 
 
 }
