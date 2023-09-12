@@ -1,12 +1,16 @@
 
 package universidadlp;
 
+import java.sql.Connection;
+import universidadlp.AccesoADatos.Coneccion;
+
 
 public class UniversidadLP {
 
    
     public static void main(String[] args) {
-        //ahora empezamos
+        Connection con=Coneccion.getConexion();
+        
     }
 
 }
