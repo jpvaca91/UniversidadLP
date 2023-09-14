@@ -57,10 +57,10 @@
                                   <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jrEstado" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jdFechaNac" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jtNombre" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="jtNombre" pref="200" max="32767" attributes="0"/>
+                                  <Component id="jdFechaNac" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -176,6 +176,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbBuscarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbNuevo">
       <Properties>

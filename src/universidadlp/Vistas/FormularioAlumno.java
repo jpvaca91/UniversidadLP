@@ -1,4 +1,3 @@
-
 package universidadlp.Vistas;
 
 import java.time.LocalDate;
@@ -8,14 +7,11 @@ import javax.swing.JOptionPane;
 import universidadlp.AccesoADatos.AlumnoData;
 import universidadlp.Entidades.Alumno;
 
-
 public class FormularioAlumno extends javax.swing.JInternalFrame {
-
     
     public FormularioAlumno() {
         initComponents();
     }
-
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -58,6 +54,11 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         });
 
         jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jbNuevo.setText("Nuevo");
         jbNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -113,10 +114,10 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel5))
                                 .addGap(36, 36, 36)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jrEstado)
-                                    .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(jdFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -173,7 +174,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // Metodo para agregar nuevo Alumno
         Boolean estado = false;
-
+        
         int dni = Integer.parseInt(jtDocumento.getText());
         String apellido = jtApellido.getText();
         String nombre = jtNombre.getText();
@@ -184,21 +185,34 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         }
         Alumno al = new Alumno(dni, apellido, nombre, fecha, estado);
         JOptionPane.showMessageDialog(null, "Alumno creado Localmente");
-
+        
         AlumnoData alumnodata = new AlumnoData();
         alumnodata.guardarAlumno(al);
         LimpiarCampos();
-
+        
 
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // Configuracion del boton "SALIR"
+
+        dispose();
         
-         dispose();
-        
-        
+
     }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        //Configuracion del boton "Buscar"
+        AlumnoData alumno = new AlumnoData();
+        Alumno alumnolocal = new Alumno();
+        alumnolocal = alumno.buscarAlumno(Integer.parseInt(jtDocumento.getText()));
+        
+        jtApellido.setText(alumnolocal.getApellido());
+        jtNombre.setText(alumnolocal.getNombre());
+        jdFechaNac.setDate(Date.from(alumnolocal.getFechaNac().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        jrEstado.setSelected(true);
+
+    }//GEN-LAST:event_jbBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
