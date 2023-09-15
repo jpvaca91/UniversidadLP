@@ -69,8 +69,18 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         });
 
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -213,6 +223,34 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         jrEstado.setSelected(true);
 
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        //Configuracion del boton "GUARDAR"
+        AlumnoData alumno = new AlumnoData ();
+        Alumno alumnoact = new Alumno();
+        alumnoact = alumno.actualizarAlumno(jbGuardar.getActionCommand());
+       
+        jtApellido.setText(alumnoact.getApellido());
+        jtNombre.setText(alumnoact.getNombre());
+        jdFechaNac.setDate(Date.from(alumnoact.getFechaNac().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+   
+        
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        //Configuracion boton "ELIMINAR"
+         Boolean estado = true;
+        AlumnoData alumno = new AlumnoData ();
+        Alumno alumnoel = new Alumno();
+        alumnoel= alumno.eliminarAlumno(jbEliminar)
+        
+   
+        if (jrEstado.isSelected()){
+            estado=false;
+        }
+            
+        
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static jdk.internal.org.objectweb.asm.commons.GeneratorAdapter.AND;
 import org.mariadb.jdbc.Statement;
 import universidadlp.Entidades.Alumno;
 
@@ -75,4 +76,56 @@ public class AlumnoData {
         }
         return alumno;
     }
+    
+    public void actualizarAlumno(Alumno alumno){
+      String sql= "UPDATE alumno SET DNI=?, apellido=?, nombre=?, fechaNacimiento=?,"
+              + "  WHERE DNI= ? AND apellido=?";
+     
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, alumno.getDni());
+            ps.setString(2, alumno.getApellido());
+            ps.setString(3, alumno.getNombre());
+            ps.setDate(4, Date.valueOf(alumno.getFechaNac()));
+            ps.setInt(5,alumno.getDni());
+            ps.setString(6, alumno.getApellido());
+            int exito=ps.executeUpdate();
+            if (exito==1){
+                JOptionPane.showMessageDialog(null, "Alumno actualizado");
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el alumno");
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+          JOptionPane.showMessageDialog(null, "Erro al acceder a la tabla alumno");
+         
+          
+        }
+        }
+        
+        public void eliminarAlumno (int DNI){
+              String sql="UPDATE alumno SET estado=0 WHERE DNI =?";
+              
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, DNI);
+          int exito= ps.executeUpdate();
+            if (exito==1){
+           
+                JOptionPane.showMessageDialog(null, "Alumno eliminado");
+            
+        }
+            
+            
+            
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro al acceder a la tabla alumno");
+        }
+              
+          }
+              
+    
 }
