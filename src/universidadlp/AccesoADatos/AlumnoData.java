@@ -79,16 +79,16 @@ public class AlumnoData {
     
     public void actualizarAlumno(Alumno alumno){
       String sql= "UPDATE alumno SET DNI=?, apellido=?, nombre=?, fechaNacimiento=?,"
-              + "  WHERE DNI= ? AND apellido=?";
+              + "WHERE DNI=?";
      
         try {
-            PreparedStatement ps=con.prepareStatement(sql);
+            PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, alumno.getDni());
             ps.setString(2, alumno.getApellido());
             ps.setString(3, alumno.getNombre());
             ps.setDate(4, Date.valueOf(alumno.getFechaNac()));
             ps.setInt(5,alumno.getDni());
-            ps.setString(6, alumno.getApellido());
+            
             int exito=ps.executeUpdate();
             if (exito==1){
                 JOptionPane.showMessageDialog(null, "Alumno actualizado");
@@ -116,7 +116,9 @@ public class AlumnoData {
            
                 JOptionPane.showMessageDialog(null, "Alumno eliminado");
             
-        }
+        } else {
+                JOptionPane.showMessageDialog(null, "Alumno no encontrado");
+            }
             
             
             

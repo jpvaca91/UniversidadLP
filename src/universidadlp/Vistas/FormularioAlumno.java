@@ -227,28 +227,25 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         //Configuracion del boton "GUARDAR"
+        
         AlumnoData alumno = new AlumnoData ();
         Alumno alumnoact = new Alumno();
-        alumnoact = alumno.actualizarAlumno(jbGuardar.getActionCommand());
-       
-        jtApellido.setText(alumnoact.getApellido());
-        jtNombre.setText(alumnoact.getNombre());
-        jdFechaNac.setDate(Date.from(alumnoact.getFechaNac().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-   
-        
+        alumnoact=alumnoLocal();
+        alumno.actualizarAlumno(alumnoact);
+               
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         //Configuracion boton "ELIMINAR"
-         Boolean estado = true;
-        AlumnoData alumno = new AlumnoData ();
-        Alumno alumnoel = new Alumno();
-        alumnoel= alumno.eliminarAlumno(jbEliminar)
         
+        AlumnoData alumno = new AlumnoData ();
+       alumno.eliminarAlumno(Integer.parseInt(jtDocumento.getText()));
    
-        if (jrEstado.isSelected()){
-            estado=false;
-        }
+       LimpiarCampos();
+       
+      // JOptionPane.showMessageDialog(null, "¿Seguro que desea eliminar el alumno?");
+          
+        
             
         
     }//GEN-LAST:event_jbEliminarActionPerformed
@@ -279,4 +276,21 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         jtApellido.setText("");
         jtNombre.setText("");
     }
+    
+    public Alumno alumnoLocal (){
+          Boolean estado = false;
+        
+        int dni = Integer.parseInt(jtDocumento.getText());
+        String apellido = jtApellido.getText();
+        String nombre = jtNombre.getText();
+        LocalDate fecha = jdFechaNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        //por defecto, el estado lo creamos falso, y ahora comprobamos si está activo para colocar bien el estado
+        if (jrEstado.isSelected()) {
+            estado = true;
+        }
+        Alumno loc = new Alumno(dni, apellido, nombre, fecha, estado);
+        return loc;
+    }
 }
+    
+        
