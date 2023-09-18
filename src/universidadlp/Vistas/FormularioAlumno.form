@@ -60,9 +60,11 @@
                               <Component id="jbBuscar" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jrEstado" min="-2" max="-2" attributes="0"/>
-                          <Component id="jtNombre" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Component id="jdFechaNac" min="-2" max="-2" attributes="0"/>
                           <Component id="jtApellido" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jdFechaNac" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtNombre" alignment="0" pref="200" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
