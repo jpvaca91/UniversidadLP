@@ -78,7 +78,7 @@ public class AlumnoData {
     }
     
     public void actualizarAlumno(Alumno alumno){
-      String sql= "UPDATE alumno SET DNI=?, apellido=?, nombre=?, fechaNacimiento=?,"
+      String sql= "UPDATE alumno SET DNI=?, apellido=?, nombre=?, fechaNacimiento=?"
               + "WHERE DNI=?";
      
         try {

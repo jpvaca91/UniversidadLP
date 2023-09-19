@@ -138,7 +138,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmFormularioAlumnoActionPerformed
 
     private void jmFormularioMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormularioMateriaActionPerformed
-        // TODO add your handling code here:
+        // Ir al formulario materia
+        escritorio.removeAll();
+        escritorio.repaint();
+        FormularioMateria fm = new FormularioMateria();
+        fm.setVisible(true);
+        escritorio.add(fm);
+        escritorio.moveToFront(fm);
     }//GEN-LAST:event_jmFormularioMateriaActionPerformed
 
     private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed
