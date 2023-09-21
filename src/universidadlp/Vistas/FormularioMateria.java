@@ -1,28 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package universidadlp.Vistas;
 
 import javax.swing.JOptionPane;
 import universidadlp.AccesoADatos.MateriaData;
 import universidadlp.Entidades.Materia;
 
-/**
- *
- * @author vico_
- */
 public class FormularioMateria extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form FormularioMateria
-     */
     public FormularioMateria() {
         initComponents();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -61,10 +48,25 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         });
 
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
-        jbGuardar.setText("Guardar");
+        jbGuardar.setText("Modificar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +112,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
                         .addComponent(jbGuardar)
                         .addGap(18, 18, 18)
                         .addComponent(jbSalir)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,54 +152,90 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         //cargar nueva materia
         Boolean exito = false;
         do {
-        
-        String nombre = jtNombre.getText();
-        int anio = Integer.parseInt(jtAnio.getText());
-        Boolean estado = false;
-        if (jrEstado.isSelected()) {
-            estado=true;
-        }
-          if (nombre!="" || anio!=0){
-        Materia materiaLocal = new Materia(nombre, anio, estado);
-        
-        MateriaData materiad = new MateriaData();
-        materiad.guardarMateria(materiaLocal);
-        exito=true;
-        
-    }
-          
-          else {
-              JOptionPane.showMessageDialog(null, "Completar campos vacios");
-          }
-        }    while (exito=false);
-        
+
+            String nombre = jtNombre.getText();
+            int anio = Integer.parseInt(jtAnio.getText());
+            Boolean estado = false;
+            if (jrEstado.isSelected()) {
+                estado = true;
+            }
+            if (nombre != "" || anio != 0) {
+                Materia materiaLocal = new Materia(nombre, anio, estado);
+
+                MateriaData materiad = new MateriaData();
+                materiad.guardarMateria(materiaLocal);
+                exito = true;
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Completar campos vacios");
+            }
+        } while (exito = false);
+
         limpiarCampos();
-        
-                  
-     
-        
-        
-    
+
+
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // Configuracion del boton buscar materia
-        
-        MateriaData materiad =new MateriaData();
-        String nombre=jtNombre.getText();
-        Materia materiaLocal=new Materia();
-       materiaLocal= materiad.buscarMateria(nombre);
-       
-       jtCodigo.setText(materiaLocal.getIdMateria()+"");
-       jtAnio.setText(materiaLocal.getAnioMateria()+"");
-       jrEstado.setSelected(true);
-       
-       
-        
-        
-        
-        
+
+        MateriaData materiad = new MateriaData();
+        String nombre = jtNombre.getText();
+        Materia materiaLocal = new Materia();
+        materiaLocal = materiad.buscarMateria(nombre);
+
+        jtCodigo.setText(materiaLocal.getIdMateria() + "");
+        jtAnio.setText(materiaLocal.getAnioMateria() + "");
+        jrEstado.setSelected(true);
+
+
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        //Configuracion del botón "SALIR"
+
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        //Configuracion del botón "ELIMINAR"
+
+        String botones[] = {"SI", "NO"};
+        int eleccion = JOptionPane.showOptionDialog(this, "Desea ELIMINAR esta Materia?", "ALERTA!", 0, 0, null, botones, this);
+
+        if (eleccion == JOptionPane.YES_OPTION) {
+            MateriaData materiad = new MateriaData();
+            String nombre = jtNombre.getText();
+
+            materiad.eliminarMateria(nombre);
+        } else{
+            JOptionPane.showMessageDialog(null,"La materia no se eliminará");
+        }
+
+        limpiarCampos();
+
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        //Configuracion del botón "MODIFICAR"
+        
+        String botones[] = {"SI", "NO"};
+        int eleccion = JOptionPane.showOptionDialog(this, "Desea MODIFICAR esta Materia?", "ALERTA!", 0, 0, null, botones, this);
+
+        if (eleccion == JOptionPane.YES_OPTION) {
+        MateriaData materiad=new MateriaData();
+        Materia materiaLocal=new Materia();
+        
+        materiaLocal.setNombre(jtNombre.getText());
+        materiaLocal.setAnioMateria(Integer.parseInt(jtAnio.getText()));
+        
+        materiad.modificarMateria(materiaLocal);
+        }else{
+            JOptionPane.showMessageDialog(null,"La materia no se modificará");
+        }
+        limpiarCampos();
+        
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -217,13 +255,11 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 
+    public void limpiarCampos() {
+        jtNombre.setText("");
+        jtAnio.setText("");
+        jtCodigo.setText("");
 
-public void limpiarCampos() {
-    jtNombre.setText("");
-    jtAnio.setText("");
-    jtCodigo.setText("");
-    
+    }
+
 }
-
-}
-
