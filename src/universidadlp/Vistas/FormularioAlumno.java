@@ -48,6 +48,12 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Fecha de Nacimiento:");
 
+        jtDocumento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtDocumentoActionPerformed(evt);
+            }
+        });
+
         jrEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrEstadoActionPerformed(evt);
@@ -249,6 +255,10 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             
         
     }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jtDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtDocumentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtDocumentoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
