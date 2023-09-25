@@ -86,9 +86,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu3.setText("Administracion");
 
         jmInscripciones.setText("Manejo de Inscripciones");
+        jmInscripciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmInscripcionesActionPerformed(evt);
+            }
+        });
         jMenu3.add(jmInscripciones);
 
         jmNotas.setText("Manipulacion de Notas");
+        jmNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmNotasActionPerformed(evt);
+            }
+        });
         jMenu3.add(jmNotas);
 
         jMenuBar1.add(jMenu3);
@@ -152,6 +162,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
       
         
     }//GEN-LAST:event_jMenu6ActionPerformed
+
+    private void jmNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmNotasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmNotasActionPerformed
+
+    private void jmInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmInscripcionesActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        FormularioInscripcion fi = new FormularioInscripcion();
+        fi.setVisible(true);
+        escritorio.add(fi);
+        escritorio.moveToFront(fi);
+    }//GEN-LAST:event_jmInscripcionesActionPerformed
 
     /**
      * @param args the command line arguments

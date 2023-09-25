@@ -5,6 +5,7 @@
  */
 package universidadlp.Vistas;
 
+import universidadlp.AccesoADatos.AlumnoData;
 import universidadlp.AccesoADatos.InscripcionData;
 import universidadlp.Entidades.Alumno;
 
@@ -14,11 +15,27 @@ import universidadlp.Entidades.Alumno;
  */
 public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form FormularioInscripcion
-     */
+    private InscripcionData id;
+    private AlumnoData ad;
+    private Alumno aluSeleccionado;
+
     public FormularioInscripcion() {
         initComponents();
+
+        id = new InscripcionData();
+        ad = new AlumnoData();
+        cargarCombo();
+    }
+
+    private void cargarCombo() {
+        jcbAlumnos.removeAllItems();
+
+        for (Alumno alu : ad.listarAlumnos()) {
+       jcbAlumnos.addItem(alu);
+        }
+        if(jcbAlumnos.getItemCount()>0){
+           aluSeleccionado=(Alumno)jcbAlumnos.getSelectedItem();
+        }
     }
 
     /**
@@ -102,24 +119,28 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
                         .addGap(134, 134, 134))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton3)
-                                .addGap(43, 43, 43)
-                                .addComponent(jButton1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jRadioButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jRadioButton1))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jcbAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(0, 18, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jcbAlumnos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton3)
+                                        .addGap(43, 43, 43)
+                                        .addComponent(jButton1))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jRadioButton2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jRadioButton1))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(8, 8, 8)))))
+                .addGap(0, 10, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -141,7 +162,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
                     .addComponent(jRadioButton2))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton3)
@@ -162,10 +183,9 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
     private void jcbAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnosActionPerformed
         // Configuracion del combo box 
-      InscripcionData insc= new InscripcionData();
-      
-      
-      // AlumnoData alumno = new AlumnoData ();
+        // InscripcionData insc= new InscripcionData();
+
+        // AlumnoData alumno = new AlumnoData ();
         //Alumno alumnoact = new Alumno();
         //alumnoact=alumnoLocal();
         //alumno.actualizarAlumno(alumnoact);
