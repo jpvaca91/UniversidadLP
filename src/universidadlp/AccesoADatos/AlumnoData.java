@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -131,6 +133,32 @@ public class AlumnoData {
         
               
           }
-              
+            public List<Alumno> listarAlumnos() {
+
+        String sql = "SELECT DNI,apellido,nombre,fechaNacimiento FROM alumno WHERE estado=1 ";
+        ArrayList<Alumno> alumnos = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+           
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+               Alumno alumno = new Alumno();
+                alumno.setDni(rs.getInt("DNI"));
+                alumno.setApellido(rs.getString("apellido"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
+                alumno.setEstado(true);
+                
+                alumnos.add(alumno);
+
+            } 
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumnos" + ex);
+        }
+        return alumnos;
+    }  
     
 }
