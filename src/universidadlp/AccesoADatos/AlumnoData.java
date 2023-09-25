@@ -103,6 +103,8 @@ public class AlumnoData {
          
           
         }
+        
+        
         }
         
         public void eliminarAlumno (int DNI){
@@ -126,6 +128,7 @@ public class AlumnoData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro al acceder a la tabla alumno");
         }
+        
               
           }
               
