@@ -5,6 +5,7 @@
  */
 package universidadlp.Vistas;
 
+import universidadlp.AccesoADatos.InscripcionData;
 import universidadlp.Entidades.Alumno;
 
 /**
@@ -161,7 +162,13 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
     private void jcbAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnosActionPerformed
         // Configuracion del combo box 
-        
+      InscripcionData insc= new InscripcionData();
+      
+      
+      // AlumnoData alumno = new AlumnoData ();
+        //Alumno alumnoact = new Alumno();
+        //alumnoact=alumnoLocal();
+        //alumno.actualizarAlumno(alumnoact);
     }//GEN-LAST:event_jcbAlumnosActionPerformed
 
 

@@ -135,7 +135,7 @@ public class AlumnoData {
           }
             public List<Alumno> listarAlumnos() {
 
-        String sql = "SELECT DNI,apellido,nombre,fechaNacimiento FROM alumno WHERE estado=1 ";
+        String sql = "SELECT DNI,apellido,nombre FROM alumno WHERE estado=1 ";
         ArrayList<Alumno> alumnos = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -147,7 +147,7 @@ public class AlumnoData {
                 alumno.setDni(rs.getInt("DNI"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
-                alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
+                
                 alumno.setEstado(true);
                 
                 alumnos.add(alumno);
