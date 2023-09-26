@@ -5,9 +5,13 @@
  */
 package universidadlp.Vistas;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import universidadlp.AccesoADatos.AlumnoData;
 import universidadlp.AccesoADatos.InscripcionData;
 import universidadlp.Entidades.Alumno;
+import universidadlp.Entidades.Materia;
 
 /**
  *
@@ -18,6 +22,10 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
     private InscripcionData id;
     private AlumnoData ad;
     private Alumno aluSeleccionado;
+    private DefaultTableModel modelo=new DefaultTableModel();
+    private List<Materia> listaM;
+    private List<Alumno> listaA;
+    
 
     public FormularioInscripcion() {
         initComponents();
@@ -25,6 +33,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         id = new InscripcionData();
         ad = new AlumnoData();
         cargarCombo();
+        armarCabecera();
     }
 
     private void cargarCombo() {
@@ -56,7 +65,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtMaterias = new javax.swing.JTable();
         jcbAlumnos = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -93,7 +102,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         jButton3.setText("Anular Inscripcion");
         jButton3.setEnabled(false);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -104,7 +113,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtMaterias);
 
         jcbAlumnos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,6 +189,12 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
     private void jrbMateInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMateInscActionPerformed
         // TODO add your handling code here:
+        Alumno select=(Alumno)jcbAlumnos.getSelectedItem();
+        listaM=(ArrayList) id.obtenerMateriasCursadas(select.getIdAlumno());
+        for(Materia m:listaM){
+            modelo.addRow(new Object);
+        }
+        
     }//GEN-LAST:event_jrbMateInscActionPerformed
 
     private void jcbAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnosActionPerformed
@@ -205,10 +220,33 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbsalir;
     private javax.swing.JComboBox<Alumno> jcbAlumnos;
     private javax.swing.JRadioButton jrbMateInsc;
     private javax.swing.JRadioButton jrbMaterNoInsc;
+    private javax.swing.JTable jtMaterias;
     // End of variables declaration//GEN-END:variables
+
+    private void armarCabecera(){
+        
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Año");
+        
+        jtMaterias.setModel(modelo);
+        
+    }
+     private void cargarDatos(){
+         
+     }
+
+     private void borrarFilaTabla(){
+         
+         int indice=modelo.getRowCount()-1;
+         for(int i=indice;i>=0;i--){
+             modelo.removeRow(i);
+         }
+     }
+
 }
+
