@@ -84,9 +84,14 @@ public class Alumno {
         this.estado = estado;
     }
 
-    @Override
+   /* @Override
     public String toString() {
         return "Alumno{" + "idAlumno=" + idAlumno + ", dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + ", fechaNac=" + fechaNac + ", estado=" + estado + '}';
+    }*/
+
+    @Override
+    public String toString() {
+        return dni+"-"+apellido+","+nombre;
     }
 
    
