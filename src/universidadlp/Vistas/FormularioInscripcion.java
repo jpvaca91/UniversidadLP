@@ -187,7 +187,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         // Listado de materias no inscriptas
         jrbMateInsc.setSelected(false);
         Alumno select=(Alumno)jcbAlumnos.getSelectedItem();
-        listaM=(ArrayList) id.obtenerMateriasNOCursadas(select.getIdAlumno());
+        listaM= id.obtenerMateriasNOCursadas(select.getIdAlumno());
         for(Materia m:listaM){
             modelo.addRow(new Object[] {m.getIdMateria(),m.getNombre(),m.getAnioMateria()});
         }
@@ -197,7 +197,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         // Listado de materias inscriptas
         jrbMaterNoInsc.setSelected(false);
         Alumno select=(Alumno)jcbAlumnos.getSelectedItem();
-        listaM=(ArrayList) id.obtenerMateriasCursadas(select.getIdAlumno());
+        listaM= id.obtenerMateriasCursadas(select.getIdAlumno());
         for(Materia m:listaM){
             modelo.addRow(new Object[] {m.getIdMateria(),m.getNombre(),m.getAnioMateria()});
         }
