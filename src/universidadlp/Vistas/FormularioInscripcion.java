@@ -184,15 +184,22 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbMaterNoInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMaterNoInscActionPerformed
-        // TODO add your handling code here:
+        // Listado de materias no inscriptas
+        jrbMateInsc.setSelected(false);
+        Alumno select=(Alumno)jcbAlumnos.getSelectedItem();
+        listaM=(ArrayList) id.obtenerMateriasNOCursadas(select.getIdAlumno());
+        for(Materia m:listaM){
+            modelo.addRow(new Object[] {m.getIdMateria(),m.getNombre(),m.getAnioMateria()});
+        }
     }//GEN-LAST:event_jrbMaterNoInscActionPerformed
 
     private void jrbMateInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMateInscActionPerformed
-        // TODO add your handling code here:
+        // Listado de materias inscriptas
+        jrbMaterNoInsc.setSelected(false);
         Alumno select=(Alumno)jcbAlumnos.getSelectedItem();
         listaM=(ArrayList) id.obtenerMateriasCursadas(select.getIdAlumno());
         for(Materia m:listaM){
-            modelo.addRow(new Object);
+            modelo.addRow(new Object[] {m.getIdMateria(),m.getNombre(),m.getAnioMateria()});
         }
         
     }//GEN-LAST:event_jrbMateInscActionPerformed
