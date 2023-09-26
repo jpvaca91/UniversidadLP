@@ -221,23 +221,69 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         //Configuracion del boton "Buscar"
         AlumnoData alumno = new AlumnoData();
-        Alumno alumnolocal = new Alumno();
-        alumnolocal = alumno.buscarAlumno(Integer.parseInt(jtDocumento.getText()));
+        Alumno alumnoActual = new Alumno();
+       /* alumnolocal = alumno.buscarAlumno(Integer.parseInt(jtDocumento.getText()));
         
         jtApellido.setText(alumnolocal.getApellido());
         jtNombre.setText(alumnolocal.getNombre());
         jdFechaNac.setDate(Date.from(alumnolocal.getFechaNac().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        jrEstado.setSelected(true);
-
+        jrEstado.setSelected(true);*/
+        
+       try{
+       Integer dni=Integer.parseInt(jtDocumento.getText());
+       alumnoActual=alumno.buscarAlumno(dni);
+       if(alumnoActual!=null){
+           
+           jtApellido.setText(alumnoActual.getApellido());
+           jtNombre.setText(alumnoActual.getNombre());
+           jrEstado.setSelected(alumnoActual.isEstado());
+           LocalDate lc=alumnoActual.getFechaNac();
+           java.util.Date date=java.util.Date.from(lc.atStartOfDay(ZoneId.systemDefault()).toInstant());
+          jdFechaNac.setDate(date);
+       }
+       
+       }catch(NumberFormatException ex){
+           JOptionPane.showMessageDialog(this, "Debe ingresar un numero vàlido");
+       }
+           
+           
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         //Configuracion del boton "GUARDAR"
         
         AlumnoData alumno = new AlumnoData ();
-        Alumno alumnoact = new Alumno();
-        alumnoact=alumnoLocal();
-        alumno.actualizarAlumno(alumnoact);
+        Alumno alumnoActual = new Alumno();
+       /* alumnoact=alumnoLocal();
+        alumno.actualizarAlumno(alumnoact);*/
+       
+       try{
+           Integer dni=Integer.parseInt(jtDocumento.getText());
+           String nombre=jtNombre.getText();
+           String apellido=jtApellido.getText();
+           if(nombre.isEmpty()|| apellido.isEmpty()){
+               
+               JOptionPane.showMessageDialog(null, "No puede haber campos vacios");
+               return;
+           }
+           java.util.Date sfecha=jdFechaNac.getDate();
+           LocalDate fechaNac=sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+           Boolean estado=jrEstado.isSelected();
+           
+           if(alumnoActual==null){
+               alumnoActual=new Alumno(dni,apellido,nombre,fechaNac,estado);
+               alumno.guardarAlumno(alumnoActual);
+           }else{
+               alumnoActual.setDni(dni);
+               alumnoActual.setApellido(apellido);
+               alumnoActual.setNombre(nombre);
+               alumnoActual.setFechaNac(fechaNac);
+               alumno.actualizarAlumno(alumnoActual);
+           }
+           
+       }catch(NumberFormatException nfe){
+           JOptionPane.showMessageDialog(null, "Debe ingresar un dni vàlido");
+       }
                
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -285,6 +331,9 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         jtDocumento.setText("");
         jtApellido.setText("");
         jtNombre.setText("");
+        jrEstado.setSelected(true);
+        jdFechaNac.setDate(new Date());
+       
     }
     
     public Alumno alumnoLocal (){
