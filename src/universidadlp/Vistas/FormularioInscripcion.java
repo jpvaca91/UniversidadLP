@@ -13,6 +13,7 @@ import universidadlp.AccesoADatos.AlumnoData;
 import universidadlp.AccesoADatos.InscripcionData;
 import universidadlp.AccesoADatos.MateriaData;
 import universidadlp.Entidades.Alumno;
+import universidadlp.Entidades.Inscripcion;
 import universidadlp.Entidades.Materia;
 
 /**
@@ -102,6 +103,11 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
         jbInscribir.setText("Inscribir");
         jbInscribir.setEnabled(false);
+        jbInscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbInscribirActionPerformed(evt);
+            }
+        });
 
         jbAnuInsc.setText("Anular Inscripcion");
         jbAnuInsc.setEnabled(false);
@@ -200,7 +206,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         jbAnuInsc.setEnabled(false);
         jbInscribir.setEnabled(true);
         cargarMateriasNoInscriptas();
-        
+
     }//GEN-LAST:event_jrbMaterNoInscActionPerformed
 
     private void jrbMateInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMateInscActionPerformed
@@ -234,6 +240,26 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jbsalirActionPerformed
+
+    private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
+        // Configuracion del botón Inscribir
+
+        int filaSeleccionada = jtMaterias.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            Alumno a = (Alumno) jcbAlumnos.getSelectedItem();
+            int idMateria = (Integer) modelo.getValueAt(filaSeleccionada, 0);
+            String nombreMateria = (String) modelo.getValueAt(filaSeleccionada, 1);
+            int anio = (Integer) modelo.getValueAt(filaSeleccionada, 2);
+            Materia m=new Materia(idMateria,nombreMateria,anio,true);
+            
+            Inscripcion i=new Inscripcion(a,m,0);
+            id.guardarInscripcion(i);
+            borrarFilaTabla();
+            
+        }
+
+
+    }//GEN-LAST:event_jbInscribirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
