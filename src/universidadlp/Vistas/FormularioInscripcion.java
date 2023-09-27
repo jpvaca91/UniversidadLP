@@ -7,6 +7,7 @@ package universidadlp.Vistas;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidadlp.AccesoADatos.AlumnoData;
 import universidadlp.AccesoADatos.InscripcionData;
@@ -27,16 +28,14 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
     private List<Materia> listaM;
     private List<Alumno> listaA;
     private MateriaData md;
-    
 
     public FormularioInscripcion() {
         initComponents();
-        
-     //   listaA=ad.listarAlumnos();
-        id = new InscripcionData();
         ad = new AlumnoData();
-        modelo=new DefaultTableModel();
-        md=new MateriaData();
+        listaA = ad.listarAlumnos();
+        modelo = new DefaultTableModel();
+        id = new InscripcionData();
+        md = new MateriaData();
         cargarCombo();
         armarCabecera();
     }
@@ -45,10 +44,10 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         jcbAlumnos.removeAllItems();
 
         for (Alumno alu : ad.listarAlumnos()) {
-       jcbAlumnos.addItem(alu);
+            jcbAlumnos.addItem(alu);
         }
-        if(jcbAlumnos.getItemCount()>0){
-           aluSeleccionado=(Alumno)jcbAlumnos.getSelectedItem();
+        if (jcbAlumnos.getItemCount() > 0) {
+            aluSeleccionado = (Alumno) jcbAlumnos.getSelectedItem();
         }
     }
 
@@ -198,14 +197,15 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         }*/
         borrarFilaTabla();
         jrbMateInsc.setSelected(false);
-        cargarMateriasNoInscriptas();
         jbAnuInsc.setEnabled(false);
         jbInscribir.setEnabled(true);
+        cargarMateriasNoInscriptas();
+        
     }//GEN-LAST:event_jrbMaterNoInscActionPerformed
 
     private void jrbMateInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMateInscActionPerformed
         // Listado de materias inscriptas
-       /* jrbMaterNoInsc.setSelected(false);
+        /* jrbMaterNoInsc.setSelected(false);
         Alumno select=(Alumno)jcbAlumnos.getSelectedItem();
         listaM= id.obtenerMateriasCursadas(select.getIdAlumno());
         for(Materia m:listaM){
@@ -213,11 +213,11 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         }*/
         borrarFilaTabla();
         jrbMaterNoInsc.setSelected(false);
-        cargarMateriasInscriptas();
         jbAnuInsc.setEnabled(true);
         jbInscribir.setEnabled(false);
-        
-        
+        cargarMateriasInscriptas();
+
+
     }//GEN-LAST:event_jrbMateInscActionPerformed
 
     private void jcbAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnosActionPerformed
@@ -250,40 +250,53 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
     private javax.swing.JTable jtMaterias;
     // End of variables declaration//GEN-END:variables
 
-    private void armarCabecera(){
-        
-        modelo.addColumn("ID");
+    private void armarCabecera() {
+
+        /*modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Año");
-        
-        jtMaterias.setModel(modelo);
-        
-    }
-     private void cargarDatos(){
-         
-     }
 
-     private void borrarFilaTabla(){
-         
-         int indice=modelo.getRowCount()-1;
-         for(int i=indice;i>=0;i--){
-             modelo.removeRow(i);
-         }
-     }
-private void cargarMateriasNoInscriptas(){
-    //borrarFilaTabla();
-     Alumno select=(Alumno)jcbAlumnos.getSelectedItem();
-        listaM= id.obtenerMateriasNOCursadas(select.getIdAlumno());
-        for(Materia m:listaM){
-            modelo.addRow(new Object[] {m.getIdMateria(),m.getNombre(),m.getAnioMateria()});
-    
-}
-}
-private void cargarMateriasInscriptas(){
-     Alumno select=(Alumno)jcbAlumnos.getSelectedItem();
-        List<Materia> lista= id.obtenerMateriasCursadas(select.getIdAlumno());
-        for(Materia m:listaM){
-            modelo.addRow(new Object[] {m.getIdMateria(),m.getNombre(),m.getAnioMateria()});
-}
-}
+        jtMaterias.setModel(modelo);*/
+        ArrayList<Object> filaCabecera = new ArrayList<>();
+        filaCabecera.add("ID");
+        filaCabecera.add("Nombre");
+        filaCabecera.add("Año");
+
+        for (Object it : filaCabecera) {
+            modelo.addColumn(it);
+        }
+        jtMaterias.setModel(modelo);
+
+    }
+
+    private void cargarDatos() {
+
+    }
+
+    private void borrarFilaTabla() {
+
+        int indice = modelo.getRowCount() - 1;
+        for (int i = indice; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+    }
+
+    private void cargarMateriasNoInscriptas() {
+        //borrarFilaTabla();
+        Alumno select = (Alumno) jcbAlumnos.getSelectedItem();
+
+        listaM = id.obtenerMateriasNOCursadas(select.getIdAlumno());
+        for (Materia m : listaM) {
+            modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria()});
+
+        }
+    }
+
+    private void cargarMateriasInscriptas() {
+        Alumno select = (Alumno) jcbAlumnos.getSelectedItem();
+        List<Materia> lista = id.obtenerMateriasCursadas(select.getIdAlumno());
+        for (Materia m : lista) {
+            modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria()});
+        }
+    }
 }
