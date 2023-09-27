@@ -191,19 +191,19 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // Metodo para agregar nuevo Alumno
         Boolean estado = false;
-        Boolean comprobar=false;
+     
         String doc;
-        do{
+    
             doc=jtDocumento.getText();
             if( esNumerico(doc)){
-                 comprobar=true;
+         
             } else {
                 JOptionPane.showMessageDialog(null, "Ingresar un numero de documento valido");
         }
                
             
                 
-        }while(comprobar==false);
+      
         int dni = Integer.parseInt(jtDocumento.getText());
         String apellido = jtApellido.getText();
         String nombre = jtNombre.getText();
