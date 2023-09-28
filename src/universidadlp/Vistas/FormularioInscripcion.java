@@ -233,12 +233,8 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
     private void jcbAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnosActionPerformed
         // Configuracion del combo box
-        // InscripcionData insc= new InscripcionData();
-
-        // AlumnoData alumno = new AlumnoData ();
-        //Alumno alumnoact = new Alumno();
-        //alumnoact=alumnoLocal();
-        //alumno.actualizarAlumno(alumnoact);
+        jrbMaterNoInsc.setSelected(false);
+        jrbMateInsc.setSelected(false);
     }//GEN-LAST:event_jcbAlumnosActionPerformed
 
     private void jbsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbsalirActionPerformed
@@ -318,9 +314,6 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
     }
 
-    private void cargarDatos() {
-
-    }
 
     private void borrarFilaTabla() {
 

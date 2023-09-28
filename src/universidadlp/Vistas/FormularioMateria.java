@@ -3,6 +3,7 @@ package universidadlp.Vistas;
 import javax.swing.JOptionPane;
 import universidadlp.AccesoADatos.MateriaData;
 import universidadlp.Entidades.Materia;
+import static universidadlp.Vistas.FormularioAlumno.esNumerico;
 
 public class FormularioMateria extends javax.swing.JInternalFrame {
 
@@ -208,8 +209,8 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
             String nombre = jtNombre.getText();
 
             materiad.eliminarMateria(nombre);
-        } else{
-            JOptionPane.showMessageDialog(null,"La materia no se eliminará");
+        } else {
+            JOptionPane.showMessageDialog(null, "La materia no se eliminará");
         }
 
         limpiarCampos();
@@ -218,23 +219,30 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         //Configuracion del botón "MODIFICAR"
-        
-        String botones[] = {"SI", "NO"};
-        int eleccion = JOptionPane.showOptionDialog(this, "Desea MODIFICAR esta Materia?", "ALERTA!", 0, 0, null, botones, this);
+        String año;
 
-        if (eleccion == JOptionPane.YES_OPTION) {
-        MateriaData materiad=new MateriaData();
-        Materia materiaLocal=new Materia();
-        
-        materiaLocal.setNombre(jtNombre.getText());
-        materiaLocal.setAnioMateria(Integer.parseInt(jtAnio.getText()));
-        
-        materiad.modificarMateria(materiaLocal);
-        }else{
-            JOptionPane.showMessageDialog(null,"La materia no se modificará");
+        año = jtAnio.getText();
+        if (esNumerico(año)) {
+            String botones[] = {"SI", "NO"};
+            int eleccion = JOptionPane.showOptionDialog(this, "Desea MODIFICAR esta Materia?", "ALERTA!", 0, 0, null, botones, this);
+
+            if (eleccion == JOptionPane.YES_OPTION) {
+                MateriaData materiad = new MateriaData();
+                Materia materiaLocal = new Materia();
+
+                materiaLocal.setNombre(jtNombre.getText());
+                materiaLocal.setAnioMateria(Integer.parseInt(jtAnio.getText()));
+
+                materiad.modificarMateria(materiaLocal);
+            } else {
+                JOptionPane.showMessageDialog(null, "La materia no se modificará");
+            }
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingresar un numero de documento valido");
         }
-        limpiarCampos();
-        
+
+
     }//GEN-LAST:event_jbGuardarActionPerformed
 
 
