@@ -111,6 +111,11 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
         jbAnuInsc.setText("Anular Inscripcion");
         jbAnuInsc.setEnabled(false);
+        jbAnuInsc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAnuInscActionPerformed(evt);
+            }
+        });
 
         jtMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -260,6 +265,24 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jbInscribirActionPerformed
+
+    private void jbAnuInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnuInscActionPerformed
+        // Configuracion del boton "Anular Inscripcion"
+        int filaSeleccionada=jtMaterias.getSelectedRow();
+        if(filaSeleccionada!=-1){
+            Alumno a =(Alumno) jcbAlumnos.getSelectedItem();
+            int idMateria=(Integer) modelo.getValueAt(filaSeleccionada, 0);
+            
+            id.borrarInscripcionMateriaAlumno(a.getIdAlumno(), idMateria);
+            borrarFilaTabla();
+            
+            
+        }else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una Fila en la Tabala");
+        }
+        
+        
+    }//GEN-LAST:event_jbAnuInscActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
