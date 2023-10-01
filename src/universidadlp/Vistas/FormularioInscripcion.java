@@ -35,20 +35,24 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         ad = new AlumnoData();
         listaA = ad.listarAlumnos();
         modelo = new DefaultTableModel();
-        id = new InscripcionData();
-        md = new MateriaData();
+         md = new MateriaData();
+        listaM = md.listarMaterias();
+        id  = new InscripcionData();
+       
         cargarCombo();
         armarCabecera();
     }
 
     private void cargarCombo() {
-        jcbAlumnos.removeAllItems();
+        /*jcbAlumnos.removeAllItems();
 
         for (Alumno alu : ad.listarAlumnos()) {
             jcbAlumnos.addItem(alu);
         }
         if (jcbAlumnos.getItemCount() > 0) {
-            aluSeleccionado = (Alumno) jcbAlumnos.getSelectedItem();
+            aluSeleccionado = (Alumno) jcbAlumnos.getSelectedItem();*/
+        for(Alumno item: listaA){
+            jcbAlumnos.addItem(item);
         }
     }
 

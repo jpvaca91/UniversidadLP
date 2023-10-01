@@ -30,12 +30,12 @@ public class Coneccion {
         if (connection == null) {
             try {
                 Class.forName("org.mariadb.jdbc.Driver");
-                connection=DriverManager.getConnection (URL+DB, USUARIO,PASSWORD);
+                connection = DriverManager.getConnection (URL+DB, USUARIO,PASSWORD);
                   //JOptionPane.showMessageDialog(null, "Conección exitosa");
             } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(null, "Error al cargar los drivers:" + ex);
+                JOptionPane.showMessageDialog(null, "Error al cargar los drivers:" );
             } catch (SQLException ex) {
-               JOptionPane.showMessageDialog(null, "Error de coneccion:"+ ex);
+               JOptionPane.showMessageDialog(null, "Error de coneccion:");
             }
 
         }

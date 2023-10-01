@@ -9,15 +9,18 @@ import javax.swing.JOptionPane;
 import universidadlp.Entidades.Alumno;
 import universidadlp.Entidades.Inscripcion;
 import universidadlp.Entidades.Materia;
+import java.sql.Connection;
 
 public class InscripcionData {
 
     private Connection con = null;
+//        private Connection con = Coneccion.getConexion();
     private MateriaData md = new MateriaData();
     private AlumnoData ad = new AlumnoData();
 
-    public void InscripcionData() {
-        this.con = Coneccion.getConexion();
+    public InscripcionData() {
+//        con = Coneccion.getConexion();
+        con = Coneccion.getConexion();
 
     }
 
@@ -140,15 +143,19 @@ public class InscripcionData {
 
     public List<Materia> obtenerMateriasCursadas(int idAlumno) {
         ArrayList<Materia> materias = new ArrayList<>();
-
+       
         String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion,"
-                + " materia WHERE inscripcion.idMateria = materia.idMateria"
+                + " materia WHERE inscripcion.idMateria != materia.idMateria"
                 + " AND inscripcion.idAlumno = ?;";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idAlumno);
+           ps.setInt(1, idAlumno);
             ResultSet rs = ps.executeQuery();
+        
+            if(!rs.next())
+                JOptionPane.showMessageDialog(null, "El alumno no tiene inscripciones");
             while (rs.next()) {
+              
                 Materia materia = new Materia();
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
@@ -184,13 +191,11 @@ public class InscripcionData {
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnioMateria(rs.getInt("año"));
                 materias.add(materia);
-
             }
             ps.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion");
-            ex.printStackTrace();
         }
         return materias;
     }

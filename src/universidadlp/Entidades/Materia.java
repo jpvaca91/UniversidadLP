@@ -61,10 +61,17 @@ private boolean estado;
         this.estado = estado;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Materia{" + "idMateria=" + idMateria + ", nombre=" + nombre + ", anioMateria=" + anioMateria + ", estado=" + estado + '}';
+    
+}*/
+
+    @Override
+    public String toString() {
+        return  idMateria+"-" +nombre + "-"+anioMateria;
     }
+
 
 
 }

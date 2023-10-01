@@ -29,6 +29,7 @@ public class AlumnoData {
                 + "VALUE (?,?,?,?,?)";
 
         try {
+            
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, alumno.getDni());
             ps.setString(2, alumno.getApellido());
