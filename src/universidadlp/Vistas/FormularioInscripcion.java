@@ -212,9 +212,10 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         }*/
         borrarFilaTabla();
         jrbMateInsc.setSelected(false);
+        cargarMateriasNoInscriptas();
         jbAnuInsc.setEnabled(false);
         jbInscribir.setEnabled(true);
-        cargarMateriasNoInscriptas();
+        
 
     }//GEN-LAST:event_jrbMaterNoInscActionPerformed
 
@@ -228,9 +229,10 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         }*/
         borrarFilaTabla();
         jrbMaterNoInsc.setSelected(false);
+        cargarMateriasInscriptas();
         jbAnuInsc.setEnabled(true);
         jbInscribir.setEnabled(false);
-        cargarMateriasInscriptas();
+        
 
 
     }//GEN-LAST:event_jrbMateInscActionPerformed
@@ -340,8 +342,8 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
     private void cargarMateriasInscriptas() {
         Alumno select = (Alumno) jcbAlumnos.getSelectedItem();
-        List<Materia> lista = id.obtenerMateriasCursadas(select.getIdAlumno());
-        for (Materia m : lista) {
+       /* List<Materia>*/ listaM = id.obtenerMateriasCursadas(select.getIdAlumno());
+        for (Materia m : listaM) {
             modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria()});
         }
     }
